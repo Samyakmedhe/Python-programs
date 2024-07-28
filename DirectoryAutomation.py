@@ -2,23 +2,17 @@ import sys
 import os
 import time
 
-def DirectoryWatcher(DirName, Filename):
-    Count = 0
+def DirectoryWatcher(DirName):
     flag = os.path.isabs(DirName)
 
     if (flag == False):
-        print("Path is not a absolute path")
-        DirName = os.path.abspath(DirName)  
-        print("Coverted absolute path is : ",DirName)  
+        DirName = os.path.abspath(DirName)    
 
     exit = os.path.isdir(DirName)
     if(exit == True):
         for foldername, subfoldername , filename in os.walk(DirName):
-                for name in filename:
-                    if name == Filename:
-                        print("File is present in the directory")
-                        break
-
+            for name in filename:
+                print(name)
     else:
         print("there is no such directory")
 def main():
@@ -33,9 +27,9 @@ def main():
     
         if(sys.argv[1] == "--u" or sys.argv[1] == "--U"):
             print("Usage of the script :")
-            print("Name_Of__file Name_Of_Directory  Name_of_file")
+            print("Name_Of__file Name_Of_Directory")
             exit()
-    if(len(sys.argv) == 3):
+
         try:
             starttime = time.time()
             DirectoryWatcher(sys.argv[1])
